@@ -1,0 +1,75 @@
+/* Fuente personalizada */
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilo para el título */
+#titulo {
+    font-size: 50px;
+}
+
+/* Espaciado para el formulario */
+#formulario {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Asegurar que el input tenga buen tamaño */
+.form-control {
+    border: 2px solid rgb(255, 85, 67);
+    font-size: large;
+}
+
+/* Estilo de botones */
+.btn-primary {
+    background-color: rgb(0, 123, 255);
+    border: 2px solid rgb(0, 86, 179);
+}
+
+.btn-danger {
+    background-color: rgb(255, 85, 67);
+    border: 2px solid rgb(204, 50, 37);
+}
+
+/* Tarjetas de videojuegos */
+.card {
+    border: 2px solid #ddd;
+    height: 525px;
+    transition: transform 0.3s ease-in-out;
+    color: rgb(255, 85, 67);
+}
+
+/* Establecer tamaño fijo para las imágenes */
+.card-img-top {
+    height: 231.75px;
+    width: 100%; /* Que ocupe todo el ancho de la tarjeta */
+    object-fit: cover; /* Recorta la imagen sin distorsionarla */
+    object-position: center; /* Centra el recorte en la imagen */
+}
+
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-title{
+    font-weight: bold;
+}
+
+/* Espaciado en los párrafos dentro de las tarjetas */
+.card-text {
+    font-size: large;
+}
+
+/* Ocultar plataforma y fecha en pantallas pequeñas */
+@media (max-width: 767px) {
+    .card{
+        height: 371px;
+    }
+    .card-text {
+        display: none;
+    }
+}
