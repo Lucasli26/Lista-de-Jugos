@@ -17,6 +17,10 @@
     gap: 10px;
 }
 
+.sugerencias{
+    width: 416px;
+}
+
 /* Asegurar que el input tenga buen tamaño */
 .form-control {
     border: 2px solid rgb(255, 85, 67);
@@ -71,5 +75,8 @@
     }
     .card-text {
         display: none;
+    }
+    .sugerencias{
+        width: 351px;
     }
 }

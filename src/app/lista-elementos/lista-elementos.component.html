@@ -3,21 +3,34 @@
 
     <!-- Formulario -->
     <div id="formulario" class="row justify-content-center mb-4">
-        <div class="col-md-6 col-lg-4">
-            <input type="text" class="form-control" [(ngModel)]="nuevoElemento" placeholder="Escribe el nombre de un videojuego">
+        <div class="col-md-6 col-lg-4 position-relative">
+            <input type="text" class="form-control" [(ngModel)]="nuevoElemento" placeholder="Escribe el nombre de un videojuego" 
+                (input)="buscarSugerencias(nuevoElemento)"
+            >
+            <!-- Lista de sugerencias -->
+            <ul *ngIf="sugerencias.length > 0" class="sugerencias list-group position-absolute mt-1" style="z-index: 1000;">
+                <li 
+                    *ngFor="let juego of sugerencias" 
+                    class="list-group-item list-group-item-action" 
+                    (click)="seleccionarJuego(juego)">
+                    <img [src]="juego.background_image" alt="{{ juego.name }}" class="me-2" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                    {{ juego.name }}
+                </li>
+            </ul>
         </div>
         <div class="col-auto">
             <button class="btn btn-primary mx-2" (click)="agregarElemento()">Agregar</button>
             <button class="btn btn-danger" (click)="borrarLista()">Borrar Lista</button>
         </div>
     </div>
+    
 
     <!-- Listado de Videojuegos -->
     <div class="row">
         <div *ngFor="let juego of elementos; let i = index" class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card shadow-lg">
                 <img [src]="juego.imagen" class="card-img-top" alt="{{ juego.nombre }}">
-                <div class="card-body">
+                <div class="card-body d-flex justify-content-center align-content-center flex-column">
                     <h3 class="card-title">{{ juego.nombre }}</h3>
                     <p class="card-text"><strong>Plataformas:</strong> {{ juego.plataformas }}</p>
                     <p class="card-text"><strong>Fecha de lanzamiento:</strong> {{ juego.lanzamiento }}</p>

@@ -11,23 +11,26 @@ import { HttpClient } from '@angular/common/http';
   imports: [CommonModule, FormsModule]
 })
 export class ListaElementosComponent implements OnInit {
-  elementos: any[] = []; 
-  nuevoElemento: string = ''; 
+  elementos: any[] = [];
+  nuevoElemento: string = '';
+  sugerencias: any[] = [];
   private apiKey = '61e2eea0d573446cb73c764a0890d81f'; // 🔥 Reemplázala con tu clave de RAWG
   private apiUrl = 'https://api.rawg.io/api/games';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.cargarLista();
   }
 
   agregarElemento() {
-    if (this.nuevoElemento.trim() !== '') {  
+    if (this.nuevoElemento.trim() !== '') {
       this.buscarJuego(this.nuevoElemento);
-      this.nuevoElemento = ''; 
+      this.nuevoElemento = ''; // Limpiar el campo después de agregar
+      this.sugerencias = []; // Limpiar las sugerencias
     }
   }
+
 
   buscarJuego(nombre: string) {
     const url = `${this.apiUrl}?key=${this.apiKey}&search=${nombre}`;
@@ -46,10 +49,28 @@ export class ListaElementosComponent implements OnInit {
     });
   }
 
+  // 🔍 Buscar sugerencias a medida que el usuario escribe
+  buscarSugerencias(nombre: string) {
+    if (nombre.length < 3) {
+      this.sugerencias = []; // Limpiar si no hay suficiente texto
+      return;
+    }
+    const url = `${this.apiUrl}?key=${this.apiKey}&search=${nombre}`;
+    this.http.get<any>(url).subscribe((data) => {
+      this.sugerencias = data.results.slice(0, 5); // Mostrar solo las primeras 5 sugerencias
+    });
+  }
+
+  // ✅ Cuando el usuario selecciona una sugerencia
+  seleccionarJuego(juego: any) {
+    this.nuevoElemento = juego.name; // Poner el nombre en el input
+    this.sugerencias = []; // Limpiar la lista de sugerencias
+  }
+
   borrarLista() {
-    this.elementos = []; 
+    this.elementos = [];
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('listaElementos'); 
+      localStorage.removeItem('listaElementos');
     }
   }
 
@@ -72,6 +93,5 @@ export class ListaElementosComponent implements OnInit {
     this.elementos.splice(index, 1);
     this.guardarLista(); // Guardar cambios en localStorage
   }
-
 
 }
