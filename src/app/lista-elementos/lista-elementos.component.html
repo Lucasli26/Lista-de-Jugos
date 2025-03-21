@@ -4,16 +4,15 @@
     <!-- Formulario -->
     <div id="formulario" class="row justify-content-center mb-4">
         <div class="col-md-6 col-lg-4 position-relative">
-            <input type="text" class="form-control" [(ngModel)]="nuevoElemento" placeholder="Escribe el nombre de un videojuego" 
-                (input)="buscarSugerencias(nuevoElemento)"
-            >
+            <input type="text" class="form-control" [(ngModel)]="nuevoElemento"
+                placeholder="Escribe el nombre de un videojuego" (input)="buscarSugerencias(nuevoElemento)">
             <!-- Lista de sugerencias -->
-            <ul *ngIf="sugerencias.length > 0" class="sugerencias list-group position-absolute mt-1" style="z-index: 1000;">
-                <li 
-                    *ngFor="let juego of sugerencias" 
-                    class="list-group-item list-group-item-action" 
+            <ul *ngIf="sugerencias.length > 0" class="sugerencias list-group position-absolute mt-1"
+                style="z-index: 1000;">
+                <li *ngFor="let juego of sugerencias" class="list-group-item list-group-item-action"
                     (click)="seleccionarJuego(juego)">
-                    <img [src]="juego.background_image" alt="{{ juego.name }}" class="me-2" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
+                    <img [src]="juego.background_image" alt="{{ juego.name }}" class="me-2"
+                        style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;">
                     {{ juego.name }}
                 </li>
             </ul>
@@ -23,9 +22,8 @@
             <button class="btn btn-danger" (click)="borrarLista()">Borrar Lista</button>
         </div>
     </div>
-    
 
-    <!-- Listado de Videojuegos -->
+
     <div class="row">
         <div *ngFor="let juego of elementos; let i = index" class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card shadow-lg">
@@ -35,14 +33,185 @@
                     <p class="card-text"><strong>Plataformas:</strong> {{ juego.plataformas }}</p>
                     <p class="card-text"><strong>Fecha de lanzamiento:</strong> {{ juego.lanzamiento }}</p>
 
-                    <!-- Botón para eliminar -->
-                    <button class="btn btn-danger" (click)="eliminarJuego(i)">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-                        </svg>
-                    </button>
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-around">
+                        <!-- Botón para marcar como acabado -->
+                        <button class="btn btn-success" (click)="marcarComoAcabado(juego)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                            </svg>
+                            <span class="ms-2">Juego acabado</span>
+                        </button>
+
+                        <!-- Botón para eliminar -->
+                        <button class="btn btn-danger" (click)="eliminarJuego(i)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Tabla de Tier List -->
+    <div class="tier-list mt-5">
+        <h2 class="mb-4">Tier List de Videojuegos</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-2">Tier</th>
+                    <th scope="col" class="col-10">Videojuegos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Fila para S+ -->
+                <tr>
+                    <td class="align-middle bg-success text-white">S+</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'S+'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para S -->
+                <tr>
+                    <td class="align-middle bg-success text-white">S</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'S'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para A -->
+                <tr>
+                    <td class="align-middle bg-primary text-white">A</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'A'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para B -->
+                <tr>
+                    <td class="align-middle bg-warning text-white">B</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'B'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para C -->
+                <tr>
+                    <td class="align-middle bg-danger text-white">C</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'C'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para D -->
+                <tr>
+                    <td class="align-middle bg-secondary text-white">D</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'D'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 200px; height: 125px; border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <!-- Fila para E -->
+                <tr>
+                    <td class="align-middle bg-dark text-white">E</td>
+                    <td>
+                        <div class="d-flex flex-wrap gap-2 ">
+                            <div *ngFor="let juego of juegosTerminados">
+                                <div *ngIf="juego.tier === 'E'">
+                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
+                                        style="width: 190px; height: 125px;  border-radius: 5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Lista de juegos terminados -->
+        <div class="mt-5 mb-4">
+            <h2>Juegos Terminados</h2>
+            <div class="d-flex justify-content-center">
+                <div class="m-3" *ngFor="let juego of juegosTerminados; let i = index">
+                    <div class="juegos-terminados p-2">
+                        <img [src]="juego.imagen" class="img-terminados" alt="{{ juego.nombre }}">
+                        <div class="card-body">
+                            <!-- Slider para puntuar el juego -->
+                            <div class="mb-3">
+                                <label for="puntuacion-{{i}}" class="form-label">Puntuación: {{ juego.puntuacion || 0
+                                    }}</label>
+                                <input type="range" class="form-range" id="puntuacion-{{i}}" min="0" max="10" step="1"
+                                    [(ngModel)]="juego.puntuacion">
+                            </div>
+
+                            <!-- Botones -->
+                            <div class="d-flex justify-content-around">
+                                <!-- Botón para puntuar -->
+                                <button class="btn btn-success" (click)="puntuarJuego(juego)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                    </svg>
+                                    <span class="ms-2">Puntuar</span>
+                                </button>
+
+                                <!-- Botón para eliminar de la lista de terminados -->
+                                <button class="btn btn-danger" (click)="eliminarJuegoTerminado(i)">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                        class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

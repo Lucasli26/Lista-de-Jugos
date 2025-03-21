@@ -54,6 +54,20 @@
     object-position: center; /* Centra el recorte en la imagen */
 }
 
+.juegos-terminados{
+    border: 2px solid #ddd;
+    background-color: #ddd;
+    color: rgb(255, 85, 67);
+    cursor: pointer;
+}
+
+/* Establecer tamaño fijo para las imágenes */
+.img-terminados {
+    height: 150px;
+    width: 100%; /* Que ocupe todo el ancho de la tarjeta */
+    object-fit: cover; /* Recorta la imagen sin distorsionarla */
+    object-position: center; /* Centra el recorte en la imagen */
+}
 
 .card:hover {
     transform: scale(1.05);
