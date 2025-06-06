@@ -60,116 +60,103 @@
     </div>
 
     <!-- Tabla de Tier List -->
-    <div class="tier-list mt-5">
-        <h2 class="mb-4">Tier List de Videojuegos</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col" class="col-2">Tier</th>
-                    <th scope="col" class="col-10">Videojuegos</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Fila para S+ -->
-                <tr>
-                    <td class="align-middle bg-success text-white">S+</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'S+'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para S -->
-                <tr>
-                    <td class="align-middle bg-success text-white">S</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'S'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para A -->
-                <tr>
-                    <td class="align-middle bg-primary text-white">A</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'A'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para B -->
-                <tr>
-                    <td class="align-middle bg-warning text-white">B</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'B'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para C -->
-                <tr>
-                    <td class="align-middle bg-danger text-white">C</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'C'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para D -->
-                <tr>
-                    <td class="align-middle bg-secondary text-white">D</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'D'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 200px; height: 125px; border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <!-- Fila para E -->
-                <tr>
-                    <td class="align-middle bg-dark text-white">E</td>
-                    <td>
-                        <div class="d-flex flex-wrap gap-2 ">
-                            <div *ngFor="let juego of juegosTerminados">
-                                <div *ngIf="juego.tier === 'E'">
-                                    <img [src]="juego.imagen" alt="{{ juego.nombre }}"
-                                        style="width: 190px; height: 125px;  border-radius: 5px;">
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+<div class="tier-list mt-5">
+    <h2 class="mb-4">Tier List de Videojuegos</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="col-2">Tier</th>
+                <th scope="col" class="col-10">Videojuegos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Fila para S+ -->
+            <tr>
+                <td class="align-middle bg-success text-white">S+</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'S+'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para S -->
+            <tr>
+                <td class="align-middle bg-success text-white">S</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'S'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para A -->
+            <tr>
+                <td class="align-middle bg-primary text-white">A</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'A'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para B -->
+            <tr>
+                <td class="align-middle bg-warning text-white">B</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'B'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para C -->
+            <tr>
+                <td class="align-middle bg-danger text-white">C</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'C'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para D -->
+            <tr>
+                <td class="align-middle bg-secondary text-white">D</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'D'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+
+            <!-- Fila para E -->
+            <tr>
+                <td class="align-middle bg-dark text-white">E</td>
+                <td>
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <ng-container *ngFor="let juego of juegosTerminados">
+                            <img *ngIf="juego.tier === 'E'" [src]="juego.imagen" alt="{{ juego.nombre }}" class="tier-img" />
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 
         <!-- Lista de juegos terminados -->
         <div class="mt-5 mb-4">
@@ -180,9 +167,10 @@
                         <img [src]="juego.imagen" class="img-terminados" alt="{{ juego.nombre }}">
                         <div class="card-body">
                             <!-- Slider para puntuar el juego -->
-                            <div class="mb-3">
-                                <label for="puntuacion-{{i}}" class="form-label">Puntuación: {{ juego.puntuacion || 0
-                                    }}</label>
+                            <div class="m-3">
+                                <label for="puntuacion-{{i}}" class="form-label puntuacion-label">
+                                    Puntuación:{{ juego.puntuacion || 0 }}
+                                </label>
                                 <input type="range" class="form-range" id="puntuacion-{{i}}" min="0" max="10" step="1"
                                     [(ngModel)]="juego.puntuacion">
                             </div>

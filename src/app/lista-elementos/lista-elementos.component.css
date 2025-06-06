@@ -82,6 +82,21 @@
     font-size: large;
 }
 
+.puntuacion-label {
+    display: inline-block;
+    min-width: 130px; /* Ajusta según el tamaño deseado */
+    text-align: center;
+}
+
+.tier-img {
+    width: 225px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+}
+
+
 /* Ocultar plataforma y fecha en pantallas pequeñas */
 @media (max-width: 767px) {
     .card{
